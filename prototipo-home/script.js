@@ -1,6 +1,48 @@
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector(".site-nav");
 
+const sanitizeSingleLine = (value, maxLength = 200) =>
+  value
+    .replace(/[\u0000-\u001F\u007F]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, maxLength);
+
+const sanitizePhoneValue = (value, maxLength = 20) =>
+  value
+    .replace(/[^0-9()+\-\s]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, maxLength);
+
+const sanitizeMultiline = (value, maxLength = 1000) =>
+  value
+    .replace(/\r\n/g, "\n")
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]+/g, "")
+    .split("\n")
+    .map((line) => line.replace(/\s+/g, " ").trim())
+    .filter(Boolean)
+    .join("\n")
+    .slice(0, maxLength);
+
+const sanitizeFieldValue = (field) => {
+  const maxLength = Number.parseInt(field.getAttribute("maxlength") || "", 10) || 250;
+
+  if (field.tagName === "TEXTAREA") {
+    return sanitizeMultiline(field.value, maxLength);
+  }
+
+  if (field.type === "tel") {
+    return sanitizePhoneValue(field.value, maxLength);
+  }
+
+  return sanitizeSingleLine(field.value, maxLength);
+};
+
+const setFieldValidity = (field, isInvalid) => {
+  field.setAttribute("aria-invalid", String(isInvalid));
+};
+
 if (navToggle && siteNav) {
   navToggle.addEventListener("click", () => {
     const isOpen = siteNav.classList.toggle("is-open");
@@ -42,9 +84,35 @@ if ("IntersectionObserver" in window && revealItems.length > 0) {
 const forms = document.querySelectorAll("[data-whatsapp-form]");
 
 forms.forEach((form) => {
-  const phone = form.getAttribute("data-phone") || "5511942244263";
-  const title = form.getAttribute("data-title") || "Solicitacao de contato";
+  const phone = (form.getAttribute("data-phone") || "5511942244263").replace(/\D+/g, "");
+  const title = sanitizeSingleLine(
+    form.getAttribute("data-title") || "Solicitacao de contato",
+    120,
+  );
   const status = form.querySelector(".form-status");
+  const controls = form.querySelectorAll("input, select, textarea");
+
+  controls.forEach((field) => {
+    const clearErrorState = () => {
+      if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
+        const safeValue = sanitizeFieldValue(field);
+
+        if (safeValue !== field.value) {
+          field.value = safeValue;
+        }
+      }
+
+      setFieldValidity(field, false);
+
+      if (status) {
+        status.textContent = "";
+        status.style.color = "";
+      }
+    };
+
+    field.addEventListener("input", clearErrorState);
+    field.addEventListener("change", clearErrorState);
+  });
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -53,9 +121,20 @@ forms.forEach((form) => {
     let hasError = false;
 
     requiredFields.forEach((field) => {
+      if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
+        const safeValue = sanitizeFieldValue(field);
+
+        if (safeValue !== field.value) {
+          field.value = safeValue;
+        }
+      }
+
       const isEmpty = !field.value.trim();
-      field.setAttribute("aria-invalid", String(isEmpty));
-      hasError = hasError || isEmpty;
+      const hasNativeError = typeof field.checkValidity === "function" && !field.checkValidity();
+      const isInvalid = isEmpty || hasNativeError;
+
+      setFieldValidity(field, isInvalid);
+      hasError = hasError || isInvalid;
     });
 
     if (hasError) {
@@ -66,18 +145,30 @@ forms.forEach((form) => {
       return;
     }
 
-    const controls = form.querySelectorAll("input, select, textarea");
     const lines = [title];
 
     controls.forEach((field) => {
-      if (!field.name || !field.value.trim()) {
+      if (!field.name) {
+        return;
+      }
+
+      const safeValue =
+        field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement
+          ? sanitizeFieldValue(field)
+          : sanitizeSingleLine(field.value, 120);
+
+      if (safeValue !== field.value) {
+        field.value = safeValue;
+      }
+
+      if (!safeValue.trim()) {
         return;
       }
 
       const id = field.getAttribute("id");
       const label = id ? form.querySelector(`label[for="${id}"]`) : null;
-      const labelText = label ? label.textContent.trim() : field.name;
-      lines.push(`${labelText}: ${field.value.trim()}`);
+      const labelText = sanitizeSingleLine(label ? label.textContent : field.name, 80);
+      lines.push(`${labelText}: ${safeValue}`);
     });
 
     if (status) {
@@ -85,8 +176,14 @@ forms.forEach((form) => {
       status.style.color = "#365645";
     }
 
-    const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(lines.join("\n"))}`;
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    const whatsappUrl = new URL(`https://wa.me/${phone}`);
+    whatsappUrl.searchParams.set("text", lines.join("\n"));
+
+    const popup = window.open(whatsappUrl.toString(), "_blank", "noopener,noreferrer");
+
+    if (!popup) {
+      window.location.href = whatsappUrl.toString();
+    }
   });
 });
 

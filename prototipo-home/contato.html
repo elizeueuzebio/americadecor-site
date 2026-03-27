@@ -9,17 +9,17 @@
       content="Entre em contato com a América Decor para orçamento de persianas sob medida, automação, instalação, manutenção e projetos especiais."
     />
     <meta name="theme-color" content="#6b4424" />
-    <link rel="canonical" href="https://americadecor.com.br/contato" />
+    <link rel="canonical" href="https://www.americadecor.com.br/contato" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="América Decor" />
     <meta property="og:title" content="Contato e Orçamento | América Decor" />
     <meta property="og:description" content="Entre em contato com a América Decor para orçamento de persianas sob medida, automação, instalação, manutenção e projetos especiais." />
-    <meta property="og:url" content="https://americadecor.com.br/contato" />
-    <meta property="og:image" content="https://americadecor.com.br/assets/fachada-america-decor.jpg" />
+    <meta property="og:url" content="https://www.americadecor.com.br/contato" />
+    <meta property="og:image" content="https://www.americadecor.com.br/assets/fachada-america-decor.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Contato e Orçamento | América Decor" />
     <meta name="twitter:description" content="Entre em contato com a América Decor para orçamento de persianas sob medida, automação, instalação, manutenção e projetos especiais." />
-    <meta name="twitter:image" content="https://americadecor.com.br/assets/fachada-america-decor.jpg" />
+    <meta name="twitter:image" content="https://www.americadecor.com.br/assets/fachada-america-decor.jpg" />
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="./site.webmanifest" />
     <link rel="stylesheet" href="./styles.css" />
@@ -28,7 +28,7 @@
         "@context": "https://schema.org",
         "@type": "ContactPage",
         "name": "Contato América Decor",
-        "url": "https://americadecor.com.br/contato",
+        "url": "https://www.americadecor.com.br/contato",
         "mainEntity": {
           "@type": "LocalBusiness",
           "name": "América Decor",
@@ -57,7 +57,7 @@
     </div>
 
     <header class="site-header">
-      <a class="brand-block" href="./index.html" aria-label="América Decor">
+      <a class="brand-block" href="/" aria-label="América Decor">
         <img class="brand-logo brand-logo-horizontal" src="./assets/logo-america-decor-horizontal.svg" alt="América Decor" width="1600" height="400" />
         <img class="brand-logo brand-logo-symbol" src="./assets/logo-america-decor-simbolo.svg" alt="" aria-hidden="true" width="500" height="500" />
       </a>
@@ -67,13 +67,13 @@
       </button>
 
       <nav class="site-nav" id="menu-principal" aria-label="Principal">
-        <a href="./index.html">Home</a>
-        <a href="./manutencao.html">Manutenção</a>
-        <a href="./automacao.html">Automação</a>
-        <a href="./persianas-sob-medida.html">Persianas</a>
-        <a href="./projetos.html">Projetos</a>
-        <a href="./sobre.html">Sobre</a>
-        <a href="./contato.html" aria-current="page">Contato</a>
+        <a href="/">Home</a>
+        <a href="/manutencao">Manutenção</a>
+        <a href="/automacao">Automação</a>
+        <a href="/persianas-sob-medida">Persianas</a>
+        <a href="/projetos">Projetos</a>
+        <a href="/sobre">Sobre</a>
+        <a href="/contato" aria-current="page">Contato</a>
       </nav>
     </header>
 
@@ -161,12 +161,12 @@
           >
             <div class="form-field">
               <label for="contato-nome">Seu nome</label>
-              <input id="contato-nome" name="nome" type="text" placeholder="Ex.: Mariana" autocomplete="name" required />
+              <input id="contato-nome" name="nome" type="text" placeholder="Ex.: Mariana" autocomplete="name" minlength="2" maxlength="80" required />
             </div>
 
             <div class="form-field">
               <label for="contato-telefone">WhatsApp</label>
-              <input id="contato-telefone" name="whatsapp" type="tel" inputmode="tel" placeholder="Ex.: (11) 99999-9999" required />
+              <input id="contato-telefone" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="Ex.: (11) 99999-9999" minlength="10" maxlength="20" pattern="[0-9()\\-\\s+]{10,20}" required />
             </div>
 
             <div class="form-field">
@@ -198,14 +198,15 @@
 
             <div class="form-field">
               <label for="contato-regiao">Cidade ou bairro</label>
-              <input id="contato-regiao" name="regiao" type="text" placeholder="Ex.: Itaim Bibi, São Paulo" required />
+              <input id="contato-regiao" name="regiao" type="text" placeholder="Ex.: Itaim Bibi, São Paulo" autocomplete="address-level2" minlength="2" maxlength="120" required />
             </div>
 
             <div class="form-field form-field-full">
               <label for="contato-detalhes">Detalhes do projeto ou problema</label>
-              <textarea id="contato-detalhes" name="detalhes" rows="6" placeholder="Ex.: Quero persianas blackout para dois quartos e automação na sala." required></textarea>
+              <textarea id="contato-detalhes" name="detalhes" rows="6" placeholder="Ex.: Quero persianas blackout para dois quartos e automação na sala." minlength="10" maxlength="1000" required></textarea>
             </div>
 
+            <p class="form-disclaimer">Não envie senhas, dados bancários ou informações pessoais sensíveis. Use apenas detalhes do ambiente e do atendimento desejado.</p>
             <p class="form-status" role="status" aria-live="polite"></p>
 
             <div class="form-actions">
@@ -294,9 +295,9 @@
       </div>
       <div>
         <strong>Navegação</strong>
-        <p><a href="./manutencao.html">Manutenção</a></p>
-        <p><a href="./automacao.html">Automação</a></p>
-        <p><a href="./persianas-sob-medida.html">Persianas</a></p>
+        <p><a href="/manutencao">Manutenção</a></p>
+        <p><a href="/automacao">Automação</a></p>
+        <p><a href="/persianas-sob-medida">Persianas</a></p>
       </div>
       <div>
         <strong>Endereço</strong>
@@ -309,5 +310,6 @@
     <script src="./script.js"></script>
   </body>
 </html>
+
 
 
