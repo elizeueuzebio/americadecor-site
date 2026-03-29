@@ -43,6 +43,31 @@ const setFieldValidity = (field, isInvalid) => {
   field.setAttribute("aria-invalid", String(isInvalid));
 };
 
+const openWhatsAppDestination = (url, target = "_self") => {
+  if (!url) {
+    return;
+  }
+
+  const normalizedTarget = target === "_blank" ? "_blank" : "_self";
+
+  if (typeof window.gtag_report_conversion === "function") {
+    window.gtag_report_conversion(url, normalizedTarget);
+    return;
+  }
+
+  if (normalizedTarget === "_blank") {
+    const popup = window.open(url, "_blank", "noopener,noreferrer");
+
+    if (!popup) {
+      window.location.href = url;
+    }
+
+    return;
+  }
+
+  window.location.href = url;
+};
+
 if (navToggle && siteNav) {
   navToggle.addEventListener("click", () => {
     const isOpen = siteNav.classList.toggle("is-open");
@@ -81,6 +106,34 @@ if ("IntersectionObserver" in window && revealItems.length > 0) {
   revealItems.forEach((item) => item.classList.add("is-visible"));
 }
 
+const whatsappLinks = document.querySelectorAll(
+  'a[href^="https://wa.me/"], a[href^="http://wa.me/"], a[href^="https://api.whatsapp.com/"]',
+);
+
+whatsappLinks.forEach((link) => {
+  link.addEventListener("click", (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    const url = link.href;
+
+    if (!url) {
+      return;
+    }
+
+    event.preventDefault();
+    openWhatsAppDestination(url, link.target);
+  });
+});
+
 const forms = document.querySelectorAll("[data-whatsapp-form]");
 
 forms.forEach((form) => {
@@ -94,14 +147,6 @@ forms.forEach((form) => {
 
   controls.forEach((field) => {
     const clearErrorState = () => {
-      if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
-        const safeValue = sanitizeFieldValue(field);
-
-        if (safeValue !== field.value) {
-          field.value = safeValue;
-        }
-      }
-
       setFieldValidity(field, false);
 
       if (status) {
@@ -178,12 +223,7 @@ forms.forEach((form) => {
 
     const whatsappUrl = new URL(`https://wa.me/${phone}`);
     whatsappUrl.searchParams.set("text", lines.join("\n"));
-
-    const popup = window.open(whatsappUrl.toString(), "_blank", "noopener,noreferrer");
-
-    if (!popup) {
-      window.location.href = whatsappUrl.toString();
-    }
+    openWhatsAppDestination(whatsappUrl.toString(), "_blank");
   });
 });
 

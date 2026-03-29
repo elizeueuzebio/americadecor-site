@@ -10,6 +10,53 @@
 
     gtag('config', 'AW-11126099381');
   </script>
+  <script>
+    function gtag_report_conversion(url, target) {
+      var destination = typeof url !== 'undefined' ? url : '';
+      var openInNewTab = target === '_blank';
+      var newWindow = null;
+      var callbackExecuted = false;
+
+      if (openInNewTab && destination) {
+        newWindow = window.open('', '_blank', 'noopener,noreferrer');
+      }
+
+      var callback = function () {
+        if (callbackExecuted || !destination) {
+          return;
+        }
+
+        callbackExecuted = true;
+
+        if (newWindow && !newWindow.closed) {
+          newWindow.location = destination;
+          return;
+        }
+
+        if (openInNewTab) {
+          var fallbackWindow = window.open(destination, '_blank', 'noopener,noreferrer');
+
+          if (!fallbackWindow) {
+            window.location = destination;
+          }
+
+          return;
+        }
+
+        window.location = destination;
+      };
+
+      gtag('event', 'conversion', {
+        'send_to': 'AW-11126099381/KsDkCNDDo5EcELWbq7kp',
+        'value': 30.0,
+        'currency': 'BRL',
+        'event_callback': callback
+      });
+
+      window.setTimeout(callback, 1000);
+      return false;
+    }
+  </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projetos e Referências | América Decor</title>
