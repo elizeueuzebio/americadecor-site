@@ -1,5 +1,10 @@
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector(".site-nav");
+const WHATSAPP_CONVERSION_EVENT = {
+  send_to: "AW-11126099381/KsDkCNDDo5EcELWbq7kp",
+  value: 30.0,
+  currency: "BRL",
+};
 
 const sanitizeSingleLine = (value, maxLength = 200) =>
   value
@@ -43,6 +48,54 @@ const setFieldValidity = (field, isInvalid) => {
   field.setAttribute("aria-invalid", String(isInvalid));
 };
 
+const reportWhatsAppConversion = (onComplete) => {
+  const complete =
+    typeof onComplete === "function"
+      ? (() => {
+          let done = false;
+
+          return () => {
+            if (done) {
+              return;
+            }
+
+            done = true;
+            onComplete();
+          };
+        })()
+      : null;
+
+  if (typeof window.gtag !== "function") {
+    if (complete) {
+      complete();
+    }
+    return;
+  }
+
+  const payload = { ...WHATSAPP_CONVERSION_EVENT };
+
+  if (complete) {
+    payload.event_callback = complete;
+  }
+
+  window.gtag("event", "conversion", payload);
+
+  if (complete) {
+    window.setTimeout(complete, 1000);
+  }
+};
+
+const triggerAnchorNavigation = (url, target = "_self") => {
+  const link = document.createElement("a");
+  link.href = url;
+  link.target = target === "_blank" ? "_blank" : "_self";
+  link.rel = "noopener noreferrer";
+  link.style.display = "none";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+};
+
 const openWhatsAppDestination = (url, target = "_self") => {
   if (!url) {
     return;
@@ -50,22 +103,15 @@ const openWhatsAppDestination = (url, target = "_self") => {
 
   const normalizedTarget = target === "_blank" ? "_blank" : "_self";
 
-  if (typeof window.gtag_report_conversion === "function") {
-    window.gtag_report_conversion(url, normalizedTarget);
-    return;
-  }
-
   if (normalizedTarget === "_blank") {
-    const popup = window.open(url, "_blank", "noopener,noreferrer");
-
-    if (!popup) {
-      window.location.href = url;
-    }
-
+    reportWhatsAppConversion();
+    triggerAnchorNavigation(url, "_blank");
     return;
   }
 
-  window.location.href = url;
+  reportWhatsAppConversion(() => {
+    window.location.href = url;
+  });
 };
 
 if (navToggle && siteNav) {
@@ -129,8 +175,7 @@ whatsappLinks.forEach((link) => {
       return;
     }
 
-    event.preventDefault();
-    openWhatsAppDestination(url, link.target);
+    reportWhatsAppConversion();
   });
 });
 
