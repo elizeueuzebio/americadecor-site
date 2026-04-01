@@ -184,7 +184,7 @@ const forms = document.querySelectorAll("[data-whatsapp-form]");
 forms.forEach((form) => {
   const phone = (form.getAttribute("data-phone") || "5511942244263").replace(/\D+/g, "");
   const title = sanitizeSingleLine(
-    form.getAttribute("data-title") || "Solicitacao de contato",
+    form.getAttribute("data-title") || "Solicitação de contato",
     120,
   );
   const status = form.querySelector(".form-status");
@@ -229,7 +229,7 @@ forms.forEach((form) => {
 
     if (hasError) {
       if (status) {
-        status.textContent = "Preencha os campos obrigatorios antes de enviar.";
+        status.textContent = "Preencha os campos obrigatórios antes de enviar.";
         status.style.color = "#a6361d";
       }
       return;
@@ -262,7 +262,7 @@ forms.forEach((form) => {
     });
 
     if (status) {
-      status.textContent = "Abrindo o WhatsApp com sua solicitacao preenchida.";
+      status.textContent = "Abrindo o WhatsApp com sua solicitação preenchida.";
       status.style.color = "#365645";
     }
 
@@ -287,12 +287,12 @@ copyButtons.forEach((button) => {
     try {
       await navigator.clipboard.writeText(text);
       if (status) {
-        status.textContent = "E-mail copiado para a area de transferencia.";
+        status.textContent = "E-mail copiado para a área de transferência.";
         status.style.color = "#365645";
       }
     } catch (error) {
       if (status) {
-        status.textContent = "Nao foi possivel copiar automaticamente. Use o e-mail exibido ao lado.";
+        status.textContent = "Não foi possível copiar automaticamente. Use o e-mail exibido ao lado.";
         status.style.color = "#a6361d";
       }
     }
