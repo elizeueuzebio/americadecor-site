@@ -2100,6 +2100,22 @@ video {
     box-shadow: 0 24px 54px rgba(0, 0, 0, 0.34);
   }
 
+  .brand-block {
+    padding: 8px 12px;
+    border: 1px solid rgba(241, 222, 199, 0.18);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255, 248, 237, 0.98), rgba(244, 228, 209, 0.94));
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+  }
+
+  .footer-logo {
+    padding: 10px 12px;
+    border: 1px solid rgba(241, 222, 199, 0.18);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255, 248, 237, 0.98), rgba(244, 228, 209, 0.94));
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+  }
+
   .nav-toggle {
     background: rgba(37, 29, 23, 0.96);
   }
