@@ -5,9 +5,9 @@
     <polygon points="150,0 300,120 0,120" fill="#E30613"/>
     
     <!-- Persianas -->
-    <rect x="40" y="120" width="50" height="180" fill="#0B1A5E"/>
-    <rect x="110" y="120" width="50" height="200" fill="#0B1A5E"/>
-    <rect x="180" y="120" width="50" height="160" fill="#0B1A5E"/>
+    <rect x="55" y="120" width="50" height="180" fill="#0B1A5E"/>
+    <rect x="125" y="120" width="50" height="200" fill="#0B1A5E"/>
+    <rect x="195" y="120" width="50" height="160" fill="#0B1A5E"/>
   </g>
 
   <!-- Texto -->
