@@ -1373,6 +1373,466 @@ video {
   }
 }
 
+/* Mobile optimization pass for the full site while preserving desktop layout. */
+@media (max-width: 820px) {
+  html {
+    scroll-padding-top: 92px;
+  }
+
+  .topbar {
+    gap: 8px;
+    padding: 8px 0 6px;
+    font-size: 0.76rem;
+  }
+
+  .topbar a {
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+
+  .site-header {
+    gap: 12px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    border-radius: 22px;
+    background: rgba(252, 247, 240, 0.76);
+    box-shadow: 0 10px 24px rgba(41, 30, 18, 0.08);
+    backdrop-filter: blur(14px);
+  }
+
+  .brand-logo-horizontal {
+    width: 164px;
+  }
+
+  .nav-toggle {
+    padding: 10px 12px;
+  }
+
+  .site-nav {
+    gap: 10px;
+    padding-top: 6px;
+  }
+
+  .site-nav a {
+    font-size: 0.92rem;
+  }
+
+  .hero {
+    gap: 18px;
+    padding: 4px 0 28px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.2rem, 10vw, 3.35rem);
+  }
+
+  .hero-text {
+    margin-top: 16px;
+    font-size: 0.98rem;
+  }
+
+  .hero-highlights {
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .hero-highlights li:nth-child(n + 3) {
+    display: none;
+  }
+
+  .hero-actions {
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .hero-metrics {
+    display: none;
+  }
+
+  .hero-visual {
+    min-height: 320px;
+  }
+
+  .hero-card-main {
+    inset: 0;
+    border-radius: 24px;
+  }
+
+  .hero-card-main img {
+    aspect-ratio: 1.02;
+    object-fit: cover;
+  }
+
+  .hero-card-side,
+  .hero-floating-bottom {
+    display: none;
+  }
+
+  .hero-floating {
+    max-width: 150px;
+    padding: 12px 14px;
+    border-radius: 16px;
+  }
+
+  .hero-floating-top {
+    top: 14px;
+    right: 12px;
+  }
+
+  .showcase,
+  .testimonials,
+  .faq {
+    padding-bottom: 56px;
+  }
+
+  .section-heading {
+    margin-bottom: 20px;
+  }
+
+  .section-heading h2,
+  .page-section-header h2,
+  .cta-banner h2 {
+    font-size: clamp(1.9rem, 8vw, 2.55rem);
+  }
+
+  .section-heading p,
+  .page-section p,
+  .info-card p,
+  .project-card p,
+  .cta-banner p,
+  .contact-card p,
+  .contact-card li,
+  .split-highlight p {
+    font-size: 0.96rem;
+  }
+
+  .page-hero {
+    gap: 18px;
+    padding: 24px;
+    margin-bottom: 56px;
+  }
+
+  .page-hero h1 {
+    margin-bottom: 14px;
+    font-size: clamp(2rem, 8.8vw, 3rem);
+  }
+
+  .page-hero img,
+  .split-highlight img,
+  .project-card img {
+    min-height: 220px;
+    aspect-ratio: 1.08;
+  }
+
+  .page-section {
+    margin-bottom: 56px;
+    padding: 24px;
+  }
+
+  .page-section-header {
+    margin-bottom: 20px;
+  }
+
+  .info-grid,
+  .project-grid,
+  .metric-grid,
+  .contact-layout,
+  .quote-form {
+    gap: 14px;
+  }
+
+  .info-card,
+  .contact-card,
+  .project-card-content,
+  .quote-copy,
+  .quote-form,
+  .testimonial-card {
+    padding: 20px;
+  }
+
+  .split-highlight-content {
+    padding: 22px;
+  }
+
+  .contact-layout {
+    gap: 16px;
+  }
+
+  .contact-channels,
+  .contact-channels-compact {
+    gap: 10px;
+  }
+
+  .contact-email-actions,
+  .contact-social-actions,
+  .form-actions {
+    gap: 10px;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    font-size: 16px;
+  }
+
+  .project-card img {
+    aspect-ratio: 1.05;
+  }
+
+  .cta-banner {
+    gap: 16px;
+    margin-bottom: 56px;
+    padding: 24px;
+  }
+
+  .cta-banner .hero-actions {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .faq-list details {
+    padding: 16px 18px;
+  }
+
+  .site-footer {
+    gap: 18px;
+    padding-top: 28px;
+    padding-bottom: 104px;
+  }
+
+  .site-footer .contact-channels-compact {
+    gap: 8px;
+  }
+
+  .site-footer .contact-channel:nth-child(1) {
+    order: 1;
+  }
+
+  .site-footer .contact-channel:nth-child(3) {
+    order: 2;
+  }
+
+  .site-footer .contact-channel:nth-child(2),
+  .site-footer .contact-channel:nth-child(4) {
+    order: 4;
+    opacity: 0.72;
+  }
+
+  .site-footer .contact-channel-link {
+    font-size: 0.98rem;
+  }
+
+  .site-footer .button-social {
+    min-height: 48px;
+  }
+
+  .mobile-cta {
+    right: 12px;
+    bottom: 12px;
+    min-width: 132px;
+    min-height: 46px;
+    padding: 0 16px;
+    box-shadow: 0 14px 24px rgba(20, 104, 61, 0.22);
+  }
+
+  #caminhos .page-link-card {
+    padding: 20px;
+  }
+
+  #caminhos .page-link-card h2 {
+    font-size: clamp(1.65rem, 7vw, 2.15rem);
+  }
+
+  #caminhos .page-link-card p {
+    font-size: 0.95rem;
+  }
+
+  #caminhos .page-link-card-emphasis p:nth-of-type(2) {
+    display: none;
+  }
+
+  #caminhos .page-link-card .check-list {
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  #caminhos .page-link-card .check-list li:nth-child(n + 3) {
+    display: none;
+  }
+
+  #caminhos .page-link-card .hero-actions {
+    margin-top: 18px;
+  }
+
+  #manutencao-home {
+    margin-bottom: 56px;
+  }
+
+  #evolucoes {
+    padding-bottom: 56px;
+  }
+
+  #evolucoes .section-heading {
+    margin-bottom: 16px;
+  }
+
+  #evolucoes .section-heading p {
+    display: none;
+  }
+
+  #evolucoes .page-link-card {
+    padding: 20px;
+  }
+
+  #evolucoes .page-link-card h2 {
+    font-size: clamp(1.6rem, 6.8vw, 2.05rem);
+  }
+
+  #evolucoes .page-link-card p {
+    font-size: 0.95rem;
+  }
+
+  #evolucoes .page-link-card .check-list {
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  #evolucoes .page-link-card .check-list li:nth-child(n + 3) {
+    display: none;
+  }
+
+  #evolucoes .page-link-card .hero-actions {
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  #evolucoes .page-link-card .hero-actions .button:last-child {
+    display: none;
+  }
+
+  .testimonials .metric-grid {
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .testimonials .metric-grid .info-card {
+    padding: 18px;
+  }
+
+  .testimonials .metric-grid .info-card:nth-child(n + 4) {
+    display: none;
+  }
+
+  .section-heading-compact {
+    margin-top: 24px;
+  }
+
+  .cta-banner .section-kicker,
+  .cta-banner p {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .topbar,
+  .site-header,
+  .hero,
+  .showcase,
+  .page-section,
+  .page-hero,
+  .testimonials,
+  .cta-banner,
+  .faq,
+  .site-footer {
+    width: min(calc(100% - 20px), var(--max-width));
+  }
+
+  .site-header {
+    border-radius: 18px;
+  }
+
+  .topbar {
+    align-items: flex-start;
+  }
+
+  .hero {
+    padding-bottom: 24px;
+  }
+
+  .hero-card-main {
+    border-radius: 22px;
+  }
+
+  .hero-card-main img {
+    aspect-ratio: 1;
+  }
+
+  .page-link-card,
+  .page-section,
+  .page-hero,
+  .contact-card,
+  .info-card,
+  .project-card-content,
+  .split-highlight-content,
+  .quote-copy,
+  .quote-form,
+  .testimonial-card,
+  .cta-banner {
+    padding: 18px;
+  }
+
+  .hero-actions .button,
+  .cta-banner .hero-actions .button,
+  .contact-email-actions > *,
+  .contact-social-actions > *,
+  .form-actions .button {
+    width: 100%;
+  }
+
+  .hero .button-secondary {
+    width: 100%;
+    min-height: auto;
+    padding: 0;
+    justify-content: flex-start;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    color: var(--accent-strong);
+  }
+
+  .hero .button-secondary:hover,
+  .hero .button-secondary:focus-visible {
+    transform: none;
+  }
+
+  .page-hero h1 {
+    font-size: clamp(1.85rem, 10vw, 2.5rem);
+  }
+
+  .section-heading h2,
+  .page-section-header h2,
+  .cta-banner h2 {
+    font-size: clamp(1.8rem, 8.5vw, 2.35rem);
+  }
+
+  .testimonials .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer {
+    padding-bottom: 92px;
+  }
+
+  .mobile-cta {
+    left: 50%;
+    right: auto;
+    bottom: 10px;
+    width: auto;
+    min-width: 148px;
+    transform: translateX(-50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
